@@ -9,9 +9,9 @@ Installation & Usage
 1. Download the image_helper.php file to your /application/helpers directory
 2. In your /config/autoload.php file, add 'image_helper' to your helpers array
 3. To output a thumbnail, include the function as the source of your image, eg:
-<code>
+````
 	<img src="<?php echo thumb('/path/to/your/full/image.jpg','200','100'); ?>">
-</code>
+````
 Where 200 is the thumbnail width and 100 is the height.
 
 
