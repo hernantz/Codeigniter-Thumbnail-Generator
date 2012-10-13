@@ -28,7 +28,7 @@ echo thumb($src_img, 200, 100, $thumb); // outputs image_thumb.jpg
 Where 200 is the thumbnail width and 100 is the height.
 
 If the fourth param is not provided, a default filename is generated based on the original filename and it's dimensions. 
-Eg: ````my_image.png```` will become ````my_image_200_100.png````.
+Eg: ````my_image.png```` will become ````my_image_200_100.png````, and will be stored in the same directory as the original source image.
 
 4. To output a thumbnail, include the function as part of the source of your image. Eg:
 
@@ -37,7 +37,7 @@ Eg: ````my_image.png```` will become ````my_image_200_100.png````.
 <img src="<?php echo base_url('/images/'.thumb('/home/user/www/images/picture.jpg','200','100')); ?>">
 ```
 
-Where 200 is the thumbnail width and 100 is the height. thumb() will return the thumb's filename.
+Where 200 is the thumbnail's width and 100 is the height. thumb() will return the thumb's filename.
 
 
 
