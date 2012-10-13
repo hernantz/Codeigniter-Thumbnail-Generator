@@ -15,12 +15,6 @@ Installation & Usage
 Where 200 is the thumbnail width and 100 is the height.
 
 
-Social
-------
-
-Follow me on twitter: <a href="http://www.twitter.com/@helloiamdarren">@helloiamdarren</a>
-
-
 Credits
 -------
 
