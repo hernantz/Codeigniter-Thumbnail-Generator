@@ -5,37 +5,38 @@
  * A TimThumb-style function to generate image thumbnails on the fly.
  * 
  * @author Darren Craig
- * @param string $image_path
+ * @author Lozano Hernán <hernantz@gmail.com>
+ * @access public
+ * @param string $src
  * @param int $width
  * @param int $height
+ * @param string $image_thumb
  * @return String
  * 
  */
 
-function thumb($image_path, $width, $height) {
+function thumb($src, $width, $height, $image_thumb = '') {
 	
 	// Get the CodeIgniter super object
 	$CI = &get_instance();
 
-	// get file extension
-	$file = explode(".", $image_path);
-	$ext = array_pop($file);
-	$file_name = array_shift($file);
-	$file_name = str_replace(dirname($image_path) . "/", "", $file_name);
+	// get src file's dirname, filename and extension
+	$path = pathinfo($src);
 
 	// Path to image thumbnail
-	$image_thumb = dirname($image_path) . '/' . $file_name . "_" . $height . '_' . $width . "." . $ext;
+	if( !$image_thumb )
+		$image_thumb = $path['dirname'] . DIRECTORY_SEPARATOR . $path['filename'] . "_" . $height . '_' . $width . "." . $path['extension'];
 
-	if (!file_exists($image_thumb)) {
+	if ( !file_exists($image_thumb) ) {
 		
 		// LOAD LIBRARY
 		$CI->load->library('image_lib');
 
 		// CONFIGURE IMAGE LIBRARY
 		$config['image_library'] = 'gd2';
-		$config['source_image'] = $image_path;
+		$config['source_image'] = $src;
 		$config['new_image'] = $image_thumb;
-		$config['maintain_ratio'] = true;
+		$config['maintain_ratio'] = TRUE;
 		$config['master_dim'] = "width";
 		
 		if ($height > $width) {
@@ -61,7 +62,7 @@ function thumb($image_path, $width, $height) {
 		$config['new_image'] = $image_thumb;
 		$config['x_axis'] = $crop_x;
 		$config['y_axis'] = $crop_y;
-		$config['maintain_ratio'] = false;
+		$config['maintain_ratio'] = FALSE;
 
 		$CI->image_lib->initialize($config);
 		$CI->image_lib->crop();
@@ -69,9 +70,8 @@ function thumb($image_path, $width, $height) {
 		
 	}
 
-	return $image_thumb;
-
+	return basename($image_thumb);
 }
 
-/* End of file image_helper.php */
-/* Location: ./application/helpers/image_helper.php */
+/* End of file thumb_helper.php */
+/* Location: ./application/helpers/thumb_helper.php */
