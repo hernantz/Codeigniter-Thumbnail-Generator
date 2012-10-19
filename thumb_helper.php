@@ -3,7 +3,7 @@
 /**
  * Thumb()
  * A TimThumb-style function to generate image thumbnails on the fly.
- * 
+ *
  * @author Darren Craig
  * @author Lozano Hernán <hernantz@gmail.com>
  * @access public
@@ -12,11 +12,11 @@
  * @param int $height
  * @param string $image_thumb
  * @return String
- * 
+ *
  */
 
 function thumb($src, $width, $height, $image_thumb = '') {
-	
+
 	// Get the CodeIgniter super object
 	$CI = &get_instance();
 
@@ -28,21 +28,13 @@ function thumb($src, $width, $height, $image_thumb = '') {
 		$image_thumb = $path['dirname'] . DIRECTORY_SEPARATOR . $path['filename'] . "_" . $height . '_' . $width . "." . $path['extension'];
 
 	if ( !file_exists($image_thumb) ) {
-		
+
 		// LOAD LIBRARY
 		$CI->load->library('image_lib');
 
 		// CONFIGURE IMAGE LIBRARY
-		$config['image_library'] = 'gd2';
 		$config['source_image'] = $src;
 		$config['new_image'] = $image_thumb;
-		$config['maintain_ratio'] = TRUE;
-		$config['master_dim'] = "width";
-		
-		if ($height > $width) {
-			$config['master_dim'] = "height";
-		}
-
 		$config['width'] = $width;
 		$config['height'] = $height;
 
